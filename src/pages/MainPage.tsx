@@ -1,4 +1,5 @@
 import { Redirect, useParams } from 'react-router-dom';
+import { newsService } from '../api/NewsService';
 import { Button } from '../components/Button';
 import { Navbar } from '../components/Navbar';
 import { NewsList } from '../components/NewsList';
@@ -6,6 +7,8 @@ import { PaginationComponent } from '../components/PaginationComponent';
 
 export const MainPage = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
+	const { data } = newsService.useGetNewsIdsQuery(null);
+
 	const pageNumber = parseInt(page ?? '', 10);
 
 	if (Number.isNaN(pageNumber) || pageNumber > 5 || pageNumber < 1) {
@@ -13,7 +16,7 @@ export const MainPage = (): JSX.Element => {
 	}
 
 	const fetchNews = (): void => {
-		console.log('fetch');
+		console.log(data);
 	};
 
 	return (
