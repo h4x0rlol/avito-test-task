@@ -1,20 +1,20 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { Article } from './pages/Article';
-import { Main } from './pages/Main';
-import { NotFound } from './pages/NotFound';
+import { MainPage } from './pages/MainPage';
+import { NewsPage } from './pages/NewsPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 const App = (): JSX.Element => {
 	return (
 		<BrowserRouter>
 			<Switch />
 			<Route path="/:page" exact>
-				<Main />
+				<MainPage />
 			</Route>
-			<Route path="/article/:id" exact>
-				<Article />
+			<Route path="/news/:id" exact>
+				<NewsPage />
 			</Route>
 			<Route path="/notfound" exact>
-				<NotFound />
+				<NotFoundPage />
 			</Route>
 			<Route path="/" exact>
 				<Redirect to="/1" />

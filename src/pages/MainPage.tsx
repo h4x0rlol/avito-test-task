@@ -4,7 +4,7 @@ import { Navbar } from '../components/Navbar';
 import { NewsList } from '../components/NewsList';
 import { PaginationComponent } from '../components/PaginationComponent';
 
-export const Main = (): JSX.Element => {
+export const MainPage = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
 	const pageNumber = parseInt(page ?? '', 10);
 
