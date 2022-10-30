@@ -7,9 +7,6 @@ import { NewsList } from '../components/NewsList';
 import { PaginationComponent } from '../components/PaginationComponent';
 import { isPageNotInrange } from '../helpers';
 
-const startIndex = 0;
-const endIndex = 100;
-
 export const MainPage = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
 	const pageNumber = parseInt(page ?? '', 10);
@@ -18,7 +15,7 @@ export const MainPage = (): JSX.Element => {
 		return <Redirect to="/notfound" />;
 	}
 
-	const { data, isFetching, isError, error, refetch } =
+	const { data, isFetching, isLoading, isError, error, refetch } =
 		newsService.useGetNewsQuery(pageNumber);
 
 	const updateNews = (): void => {
@@ -28,7 +25,7 @@ export const MainPage = (): JSX.Element => {
 	return (
 		<main className="flex flex-col h-screen">
 			<Navbar button={<Button onClick={updateNews}>Update</Button>} />
-			{isFetching ? (
+			{isFetching || isLoading ? (
 				<Loader />
 			) : (
 				<>

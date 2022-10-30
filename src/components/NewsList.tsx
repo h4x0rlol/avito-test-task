@@ -25,7 +25,6 @@ export const NewsList = ({ items, page }: NewsListProps): JSX.Element => {
 								time={el.time}
 								score={el.score}
 								title={el.title}
-								descendants={el.descendants}
 							/>
 						</li>
 					);

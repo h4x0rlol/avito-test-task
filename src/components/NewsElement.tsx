@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getTimeDifference } from '../helpers';
 import { Item } from '../types/Item.interface';
 
 interface NewsElementProps extends Item {
@@ -12,8 +13,9 @@ export const NewsElement = ({
 	score,
 	time,
 	by,
-	descendants,
 }: NewsElementProps): JSX.Element => {
+	const publishDate = getTimeDifference(time ?? 0);
+
 	return (
 		<div className="flex items-center space-x-4 p-4 pl-0 max-sm:pl-3">
 			<div className="text-orange-500 font-medium self-start place-self-start ">
@@ -29,8 +31,7 @@ export const NewsElement = ({
 				<div className="flex space-x-1.5 text-xs text-gray-500">
 					<span>{score} points</span>
 					<span>by {by}</span>
-					<span>{time}</span>
-					<span>| {descendants} comments</span>
+					<span>{publishDate}</span>
 				</div>
 			</div>
 		</div>
