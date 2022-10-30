@@ -1,24 +1,18 @@
-import {
-	AnyAction,
-	combineReducers,
-	configureStore,
-	EmptyObject,
-	EnhancedStore,
-	ThunkMiddleware,
-} from '@reduxjs/toolkit';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { newsService } from '../api/NewsService';
 import newsReducer from './reducers/NewsSlice';
 
 const rootReducer = combineReducers({
 	newsReducer,
+	[newsService.reducerPath]: newsService.reducer,
 });
 
-export const setupStore = (): EnhancedStore<
-	EmptyObject,
-	AnyAction,
-	[ThunkMiddleware<EmptyObject, AnyAction, undefined>]
-> => {
+export const setupStore = () => {
 	return configureStore({
 		reducer: rootReducer,
+		middleware: (getDefaultMiddleware) =>
+			getDefaultMiddleware().concat(newsService.middleware),
 	});
 };
 

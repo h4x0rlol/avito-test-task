@@ -1,15 +1,15 @@
 export const getFetchIndicesArray = (arr: number[], page: number): number[] => {
 	switch (page) {
 		case 1:
-			return arr.slice(0, 19);
+			return arr.slice(0, 20);
 		case 2:
-			return arr.slice(20, 39);
+			return arr.slice(20, 40);
 		case 3:
-			return arr.slice(40, 59);
+			return arr.slice(40, 60);
 		case 4:
-			return arr.slice(60, 79);
+			return arr.slice(60, 80);
 		case 5:
-			return arr.slice(80, 99);
+			return arr.slice(80, 100);
 		default:
 			return arr.slice(0, 19);
 	}
