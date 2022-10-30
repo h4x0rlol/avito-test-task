@@ -2,6 +2,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Navbar } from '../components/Navbar';
 import { NewsList } from '../components/NewsList';
+import { PaginationComponent } from '../components/PaginationComponent';
 
 export const Main = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
@@ -15,6 +16,7 @@ export const Main = (): JSX.Element => {
 		<main className="flex flex-col h-screen">
 			<Navbar button={<Button>Update</Button>} />
 			<NewsList />
+			<PaginationComponent />
 		</main>
 	);
 };
