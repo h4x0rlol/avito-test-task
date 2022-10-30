@@ -14,3 +14,7 @@ export const getFetchIndicesArray = (arr: number[], page: number): number[] => {
 			return arr.slice(0, 19);
 	}
 };
+
+export const isPageNotInrange = (pageNumber: number): boolean => {
+	return Number.isNaN(pageNumber) || pageNumber > 5 || pageNumber < 1;
+};

@@ -2,6 +2,9 @@ import { Link, useHistory } from 'react-router-dom';
 
 const totalPages = Array.from({ length: 5 }, (_, i) => i + 1);
 
+const firstPage = totalPages[0];
+const lastPage = totalPages[totalPages.length - 1];
+
 const currentPageStyle =
 	'block z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700';
 
@@ -18,14 +21,14 @@ export const PaginationComponent = ({
 	const history = useHistory();
 
 	const getPrevPage = (n: number): void => {
-		const to = n - 1 > 0 ? n - 1 : n;
+		const to = n - 1 > firstPage - 1 ? n - 1 : n;
 		if (to !== page) {
 			history.push(`/${to}`);
 		}
 	};
 
 	const getNextPage = (n: number): void => {
-		const to = n + 1 < 6 ? n + 1 : n;
+		const to = n + 1 < lastPage + 1 ? n + 1 : n;
 		if (to !== page) {
 			history.push(`/${to}`);
 		}

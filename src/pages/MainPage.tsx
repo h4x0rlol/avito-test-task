@@ -3,13 +3,14 @@ import { Button } from '../components/Button';
 import { Navbar } from '../components/Navbar';
 import { NewsList } from '../components/NewsList';
 import { PaginationComponent } from '../components/PaginationComponent';
+import { isPageNotInrange } from '../helpers';
 
 export const MainPage = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
 
 	const pageNumber = parseInt(page ?? '', 10);
 
-	if (Number.isNaN(pageNumber) || pageNumber > 5 || pageNumber < 1) {
+	if (isPageNotInrange(pageNumber)) {
 		return <Redirect to="/notfound" />;
 	}
 
