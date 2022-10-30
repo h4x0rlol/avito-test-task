@@ -1,11 +1,15 @@
+import { getStartIndexByPage } from '../helpers';
 import { Item } from '../types/Item.interface';
 import { NewsElement } from './NewsElement';
 
 type NewsListProps = {
 	items: Item[];
+	page: number;
 };
 
-export const NewsList = ({ items }: NewsListProps): JSX.Element => {
+export const NewsList = ({ items, page }: NewsListProps): JSX.Element => {
+	const startIndex = getStartIndexByPage(page);
+
 	return (
 		<div className="container flex flex-wrap justify-start items-center mx-auto">
 			<ul className="divide-y container">
@@ -13,7 +17,9 @@ export const NewsList = ({ items }: NewsListProps): JSX.Element => {
 					return (
 						<li key={el.id}>
 							<NewsElement
-								number={index + 1}
+								number={
+									page === 1 ? index + 1 : startIndex + index
+								}
 								id={el.id}
 								by={el.by}
 								time={el.time}

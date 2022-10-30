@@ -32,7 +32,7 @@ export const MainPage = (): JSX.Element => {
 				<Loader />
 			) : (
 				<>
-					<NewsList items={data ?? []} />
+					<NewsList items={data ?? []} page={pageNumber} />
 					<PaginationComponent page={pageNumber} />
 				</>
 			)}
