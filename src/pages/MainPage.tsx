@@ -12,11 +12,15 @@ export const MainPage = (): JSX.Element => {
 		return <Redirect to="/notfound" />;
 	}
 
+	const fetchNews = (): void => {
+		console.log('fetch');
+	};
+
 	return (
 		<main className="flex flex-col h-screen">
-			<Navbar button={<Button>Update</Button>} />
+			<Navbar button={<Button onClick={fetchNews}>Update</Button>} />
 			<NewsList />
-			<PaginationComponent />
+			<PaginationComponent page={pageNumber} />
 		</main>
 	);
 };

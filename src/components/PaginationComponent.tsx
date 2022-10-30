@@ -1,11 +1,44 @@
-export const PaginationComponent = (): JSX.Element => {
+import { Link, useHistory } from 'react-router-dom';
+
+const totalPages = Array.from({ length: 5 }, (_, i) => i + 1);
+
+const currentPageStyle =
+	'block z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700';
+
+const defaultPageStyle =
+	'block py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700';
+
+type PaginationComponentProps = {
+	page: number;
+};
+
+export const PaginationComponent = ({
+	page,
+}: PaginationComponentProps): JSX.Element => {
+	const history = useHistory();
+
+	const getPrevPage = (n: number): void => {
+		const to = n - 1 > 0 ? n - 1 : n;
+		if (to !== page) {
+			history.push(`/${to}`);
+		}
+	};
+
+	const getNextPage = (n: number): void => {
+		const to = n + 1 < 6 ? n + 1 : n;
+		if (to !== page) {
+			history.push(`/${to}`);
+		}
+	};
+
 	return (
 		<div className="container flex flex-wrap justify-center items-center mx-auto mt-4 pb-4">
 			<nav>
 				<ul className="inline-flex items-center -space-x-px">
 					<li>
-						<a
-							href="/"
+						<button
+							type="button"
+							onClick={() => getPrevPage(page)}
 							className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
 						>
 							<svg
@@ -21,57 +54,30 @@ export const PaginationComponent = (): JSX.Element => {
 									clipRule="evenodd"
 								/>
 							</svg>
-						</a>
+						</button>
 					</li>
 
-					<li>
-						<a
-							href="/"
-							className="block py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-						>
-							1
-						</a>
-					</li>
+					{totalPages.map((el) => {
+						return (
+							<li key={el}>
+								<Link
+									to={`/${el}`}
+									className={
+										el === page
+											? currentPageStyle
+											: defaultPageStyle
+									}
+								>
+									{el}
+								</Link>
+							</li>
+						);
+					})}
 
 					<li>
-						<a
-							href="/"
-							className="block py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-						>
-							2
-						</a>
-					</li>
-
-					<li>
-						<a
-							href="/"
-							className="block z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
-						>
-							3
-						</a>
-					</li>
-
-					<li>
-						<a
-							href="/"
-							className="block py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-						>
-							4
-						</a>
-					</li>
-
-					<li>
-						<a
-							href="/"
-							className="block py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-						>
-							5
-						</a>
-					</li>
-
-					<li>
-						<a
-							href="/"
+						<button
+							type="button"
+							onClick={() => getNextPage(page)}
 							className="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
 						>
 							<svg
@@ -87,7 +93,7 @@ export const PaginationComponent = (): JSX.Element => {
 									clipRule="evenodd"
 								/>
 							</svg>
-						</a>
+						</button>
 					</li>
 				</ul>
 			</nav>
