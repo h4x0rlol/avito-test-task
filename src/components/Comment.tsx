@@ -19,13 +19,9 @@ export const Comment = ({ comment }: CommentProps): JSX.Element => {
 							dangerouslySetInnerHTML={{ __html: commentText }}
 						/>
 					)}
-
-					{/* {comment.kids &&
-					// 		comment.kids.map((kid) => (
-					// 			<Comment item={kid} key={kid} />
-					// 		))} */}
+					{comment?.deleted && <span>Deleted</span>}
 					<div className="flex space-x-1.5 text-xs text-gray-500">
-						<span>by {comment.by}</span>
+						{!comment.deleted && <span>by {comment.by}</span>}
 						<span>{publishTime}</span>
 					</div>
 				</div>

@@ -39,7 +39,9 @@ export const MainPage = (): JSX.Element => {
 		<main className="flex flex-col h-screen">
 			<Navbar button={<Button onClick={updateNews}>Update</Button>} />
 			{isFetching || isLoading ? (
-				<Loader />
+				<div className="container flex w-screen justify-center text-center items-center h-1/2 self-center">
+					<Loader />
+				</div>
 			) : (
 				<>
 					<NewsList items={data ?? []} page={pageNumber} />

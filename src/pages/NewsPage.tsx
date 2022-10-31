@@ -25,7 +25,11 @@ export const NewsPage = (): JSX.Element => {
 			<Navbar
 				button={<Button onClick={backToMainPage}>Back to News</Button>}
 			/>
-			{newsItem.isLoading && <Loader />}
+			{newsItem.isLoading && (
+				<div className="container flex w-screen justify-center text-center items-center h-1/2 self-center">
+					<Loader />
+				</div>
+			)}
 			{newsItem.data && (
 				<News
 					news={newsItem?.data}

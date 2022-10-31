@@ -29,9 +29,10 @@ export const CommentList = ({
 			newsById?.data?.kids &&
 			newsById?.data?.kids?.length > 0
 		) {
+			console.log('setting ids');
 			setIds(newsById?.data?.kids);
 		}
-	}, [ids.length, newsById?.data]);
+	}, [newsById?.data]);
 
 	const queryError = error as ErrorType;
 
@@ -61,11 +62,8 @@ export const CommentList = ({
 				<span className="ml-1">Comments:</span>
 			</div>
 
-			{(isLoading ||
-				isFetching ||
-				newsById.isFetching ||
-				newsById.isLoading) && (
-				<div className="container flex flex-col h-screen w-screen">
+			{(isLoading || isFetching || newsById.isFetching) && (
+				<div className="container flex w-screen justify-center text-center items-center h-1/2 self-center">
 					<Loader />
 				</div>
 			)}
@@ -79,6 +77,14 @@ export const CommentList = ({
 					{queryError?.originalStatus}
 					{JSON.stringify(queryError?.data)}
 				</Error>
+			)}
+
+			{!data && !isFetching && !isLoading && !newsById.isFetching && (
+				<div className="container flex flex-col  w-screen">
+					<span className="text-center flex align-middle justify-center">
+						No comments yet...
+					</span>
+				</div>
 			)}
 
 			{data && (
