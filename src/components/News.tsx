@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { getDateFromTimestamp, getTimeDifference } from '../helpers';
+import transofrmHTMLtoText from '../helpers/sanitizeHtml';
 import { Item } from '../types/Item.interface';
 import { CommentList } from './CommentList';
 
@@ -11,6 +13,7 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 	const publishTime = `${getDateFromTimestamp(
 		news?.time ?? 0
 	)} (${getTimeDifference(news?.time ?? 0)})`;
+	const newsTitle = transofrmHTMLtoText(news?.title ?? '');
 	return (
 		<div className="container flex flex-wrap justify-start items-center mx-auto">
 			<div className="flex items-center space-x-4 p-4">
@@ -21,9 +24,9 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 								href={news?.url}
 								rel="noreferrer"
 								target="_blank"
-							>
-								{news?.title}
-							</a>
+								// eslint-disable-next-line react/no-danger
+								dangerouslySetInnerHTML={{ __html: newsTitle }}
+							/>
 						</h3>
 						<div className="flex space-x-1.5 text-xs text-gray-500">
 							<span>{news?.score} points</span>
@@ -31,7 +34,10 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 							<span>{publishTime}</span>
 							<span>| {news.descendants} comments</span>
 						</div>
-						<CommentList commentsIds={commentsIds} />
+						<CommentList
+							newsId={news?.id}
+							commentsIds={commentsIds}
+						/>
 					</div>
 				)}
 			</div>

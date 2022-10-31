@@ -1,27 +1,48 @@
+import { useEffect, useState } from 'react';
 import { commentsService } from '../api/CommentsService';
+import { newsService } from '../api/NewsService';
 import { ErrorType } from '../types/Error.type';
 import { Comment } from './Comment';
 import { Error } from './Error';
 import { Loader } from './Loader';
 
 type CommentListpProps = {
+	newsId: number;
 	commentsIds: number[];
 };
 
 export const CommentList = ({
+	newsId,
 	commentsIds,
 }: CommentListpProps): JSX.Element => {
+	const [ids, setIds] = useState<number[]>(commentsIds);
 	const { data, isFetching, isLoading, isError, error } =
-		commentsService.useGetCommentsQuery(commentsIds, {
-			skip: commentsIds?.length === 0,
+		commentsService.useGetCommentsQuery(ids, {
+			skip: ids.length === 0,
 		});
 
+	const [trigger, newsById] = newsService.useLazyGetNewsByIdQuery();
+
+	useEffect(() => {
+		if (
+			newsById?.data &&
+			newsById?.data?.kids &&
+			newsById?.data?.kids?.length > 0
+		) {
+			setIds(newsById?.data?.kids);
+		}
+	}, [ids.length, newsById?.data]);
+
 	const queryError = error as ErrorType;
+
+	const updateComments = (): void => {
+		trigger(newsId, false);
+	};
 
 	return (
 		<div className="container flex flex-wrap justify-start items-center mx-auto">
 			<div className="container flex flex-row mt-3">
-				<button type="button">
+				<button type="button" onClick={updateComments}>
 					<svg
 						className="w-4 h-4"
 						fill="none"
@@ -40,7 +61,10 @@ export const CommentList = ({
 				<span className="ml-1">Comments:</span>
 			</div>
 
-			{(isLoading || isFetching) && (
+			{(isLoading ||
+				isFetching ||
+				newsById.isFetching ||
+				newsById.isLoading) && (
 				<div className="container flex flex-col h-screen w-screen">
 					<Loader />
 				</div>

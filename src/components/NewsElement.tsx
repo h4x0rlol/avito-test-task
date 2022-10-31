@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getTimeDifference } from '../helpers';
+import transofrmHTMLtoText from '../helpers/sanitizeHtml';
 import { Item } from '../types/Item.interface';
 
 interface NewsElementProps extends Item {
@@ -15,6 +16,7 @@ export const NewsElement = ({
 	by,
 }: NewsElementProps): JSX.Element => {
 	const publishDate = getTimeDifference(time ?? 0);
+	const newsTitle = transofrmHTMLtoText(title ?? '');
 
 	return (
 		<div className="flex items-center space-x-4 p-4 pl-0 max-sm:pl-3">
@@ -23,9 +25,11 @@ export const NewsElement = ({
 			</div>
 			<div>
 				<h3 className="text-gray-700">
-					<Link className="hover:underline" to={`/news/${id}`}>
-						{title}
-					</Link>
+					<Link
+						className="hover:underline"
+						to={`/news/${id}`}
+						dangerouslySetInnerHTML={{ __html: newsTitle }}
+					/>
 				</h3>
 
 				<div className="flex space-x-1.5 text-xs text-gray-500">
