@@ -68,3 +68,6 @@ export const getTimeDifference = (timestamp: number): string => {
 
 	return `approximately ${Math.round(elapsed / msPerYear)} years ago`;
 };
+
+export const getDateFromTimestamp = (timestamp: number): string =>
+	new Date(timestamp * 1000).toLocaleDateString('en-US');

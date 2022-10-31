@@ -3,38 +3,19 @@ import {
 	fetchBaseQuery,
 	FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
-import { getFetchIndicesArray } from '../helpers';
 import { Item } from '../types/Item.interface';
 import { ResultType } from '../types/Result.type';
 import { baseUrl } from './hacker-news-api';
 
-const startIndex = 0;
-const endIndex = 100;
-
-export const newsService = createApi({
-	reducerPath: 'newsService',
+export const commentsService = createApi({
+	reducerPath: 'commentsService',
 	baseQuery: fetchBaseQuery({ baseUrl }),
 	endpoints: (build) => ({
-		getNewsById: build.query<Item, number>({
-			query: (id) => ({
-				url: `item/${id}.json`,
-			}),
-		}),
-		getNews: build.query<Item[], number>({
-			async queryFn(page, _queryApi, _extraOptions, fetchWithBQ) {
-				const newsIds = await fetchWithBQ('newstories.json');
-				if (newsIds.error) {
-					return { error: newsIds.error as FetchBaseQueryError };
-				}
-
+		getComments: build.query<Item[], number[]>({
+			async queryFn(ids, _queryApi, _extraOptions, fetchWithBQ) {
 				const result: ResultType = {
 					data: [],
 				};
-				let ids = newsIds.data as number[];
-				ids = getFetchIndicesArray(
-					ids.slice(startIndex, endIndex),
-					page
-				);
 
 				await Promise.all(
 					ids.map((el) => fetchWithBQ(`item/${el}.json`))
@@ -48,7 +29,7 @@ export const newsService = createApi({
 					})
 				);
 
-				console.log('request');
+				console.log('comments request');
 
 				return result.data[0]
 					? { data: result.data as Item[] }
