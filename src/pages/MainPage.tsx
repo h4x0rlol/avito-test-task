@@ -18,7 +18,9 @@ export const MainPage = (): JSX.Element => {
 	}
 
 	const { data, isFetching, isLoading, isError, error, refetch } =
-		newsService.useGetNewsQuery(pageNumber);
+		newsService.useGetNewsQuery(pageNumber, {
+			pollingInterval: 1000 * 60,
+		});
 
 	const updateNews = (): void => {
 		refetch();
