@@ -1,5 +1,6 @@
 import { getDateFromTimestamp, getTimeDifference } from '../helpers';
 import { Item } from '../types/Item.interface';
+import { CommentList } from './CommentList';
 
 type NewsProps = {
 	news: Item;
@@ -30,10 +31,7 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 							<span>{publishTime}</span>
 							<span>| {news.descendants} comments</span>
 						</div>
-						{/* {comments &&
-			comments.map((comment) => (
-			  <Comment comment={comment} key={comment.id} />
-			))} */}
+						<CommentList commentsIds={commentsIds} />
 					</div>
 				)}
 			</div>
