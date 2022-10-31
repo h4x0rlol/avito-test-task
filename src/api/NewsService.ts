@@ -42,14 +42,16 @@ export const newsService = createApi({
 				).then((res) =>
 					res.forEach((el) => {
 						result.data.push(el.data as Item);
-						result.error = el.error;
 						result.meta = el.meta;
+						if (el.error) {
+							result.error = el.error;
+						}
 					})
 				);
 
 				console.log('request');
 
-				return result.data
+				return result.data[0]
 					? { data: result.data as Item[] }
 					: {
 							error: result.error as FetchBaseQueryError,
