@@ -29,7 +29,7 @@ export const Comment = ({ comment }: CommentProps): JSX.Element => {
 					)}
 					{comment?.deleted && <span>Deleted</span>}
 					<div className="flex space-x-1.5 text-xs text-gray-500">
-						{!comment.deleted && <span>by {comment.by}</span>}
+						{!comment.deleted && <span>by {comment?.by}</span>}
 						<span>{publishTime}</span>
 						{comment.kids && comment.kids.length > 0 && (
 							<button

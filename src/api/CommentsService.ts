@@ -31,8 +31,6 @@ export const commentsService = createApi({
 					})
 				);
 
-				console.log('comments request');
-
 				return result.data[0]
 					? { data: result.data as Item[] }
 					: {

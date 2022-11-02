@@ -13,7 +13,9 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 	const publishTime = `${getDateFromTimestamp(
 		news?.time ?? 0
 	)} (${getTimeDifference(news?.time ?? 0)})`;
+
 	const newsTitle = transofrmHTMLtoText(news?.title ?? '');
+
 	return (
 		<div className="container flex flex-wrap justify-start items-center mx-auto">
 			<div className="flex items-center space-x-4 p-4">
@@ -32,7 +34,7 @@ export const News = ({ news, commentsIds }: NewsProps): JSX.Element => {
 							<span>{news?.score} points</span>
 							<span>by {news?.by}</span>
 							<span>{publishTime}</span>
-							<span>| {news.descendants} comments</span>
+							<span>| {news?.descendants} comments</span>
 						</div>
 						<CommentList
 							newsId={news?.id}

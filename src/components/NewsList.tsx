@@ -13,7 +13,8 @@ export const NewsList = ({ items, page }: NewsListProps): JSX.Element => {
 	return (
 		<div className="container flex flex-wrap justify-start items-center mx-auto">
 			<ul className="divide-y container">
-				{items.length > 0 &&
+				{items &&
+					items.length > 0 &&
 					items.map((el, index) => {
 						return (
 							<li key={el?.id}>

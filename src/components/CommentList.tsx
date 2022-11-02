@@ -29,7 +29,6 @@ export const CommentList = ({
 			newsById?.data?.kids &&
 			newsById?.data?.kids?.length > 0
 		) {
-			console.log('setting ids');
 			setIds(newsById?.data?.kids);
 		}
 	}, [newsById?.data]);

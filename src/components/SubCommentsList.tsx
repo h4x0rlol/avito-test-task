@@ -41,7 +41,7 @@ export const SubCommentList = ({
 				<ul className="divide-y container">
 					{data.map((el) => {
 						return (
-							<li key={el.id}>
+							<li key={el?.id}>
 								<Comment comment={el} />
 							</li>
 						);

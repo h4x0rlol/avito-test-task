@@ -50,8 +50,6 @@ export const newsService = createApi({
 					})
 				);
 
-				console.log('request');
-
 				return result.data[0]
 					? { data: result.data as Item[] }
 					: {

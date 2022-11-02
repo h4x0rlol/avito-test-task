@@ -47,6 +47,7 @@ export const getTimeDifference = (timestamp: number): string => {
 	const elapsed = current - timestamp;
 
 	if (elapsed < msPerMinute) {
+		// 0 minutes ago, like on the original website
 		return `${Math.round(elapsed / 1000)} minutes ago`;
 	}
 
