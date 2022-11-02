@@ -69,11 +69,7 @@ export const CommentList = ({
 			)}
 
 			{isError && error && (
-				<Error
-					retry={() => {
-						return null;
-					}}
-				>
+				<Error retry={updateComments}>
 					{queryError?.originalStatus}
 					{JSON.stringify(queryError?.data)}
 				</Error>

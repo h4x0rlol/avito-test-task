@@ -11,6 +11,8 @@ import { baseUrl } from './hacker-news-api';
 const startIndex = 0;
 const endIndex = 100;
 
+// You can decrease RTK query cache lifetime by passing keepUnusedDataFor here or refetchOnMountOrArgChange in hooks to faster data updates
+
 export const newsService = createApi({
 	reducerPath: 'newsService',
 	baseQuery: fetchBaseQuery({ baseUrl }),

@@ -7,6 +7,8 @@ import { Item } from '../types/Item.interface';
 import { ResultType } from '../types/Result.type';
 import { baseUrl } from './hacker-news-api';
 
+// You can decrease RTK query cache lifetime by passing keepUnusedDataFor here or refetchOnMountOrArgChange in hooks to faster data updates
+
 export const commentsService = createApi({
 	reducerPath: 'commentsService',
 	baseQuery: fetchBaseQuery({ baseUrl }),

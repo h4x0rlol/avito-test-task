@@ -1,6 +1,6 @@
 export const Loader = (): JSX.Element => {
 	return (
-		<div className="text-center flex align-middle justify-center items-center w-screen">
+		<div className="text-center flex align-middle justify-center items-center ">
 			<div role="status">
 				<svg
 					className="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-blue-600"
