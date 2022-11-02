@@ -6,20 +6,23 @@ import { NotFoundPage } from './pages/NotFoundPage';
 const App = (): JSX.Element => {
 	return (
 		<BrowserRouter>
-			<Switch />
-			<Route path="/:page" exact>
-				<MainPage />
-			</Route>
-			<Route path="/news/:id" exact>
-				<NewsPage />
-			</Route>
-			<Route path="/" exact>
-				<Redirect to="/1" />
-			</Route>
-			<Route>
-				<NotFoundPage />
-			</Route>
-			<Switch />
+			<Switch>
+				<Route path="/notfound" exact>
+					<NotFoundPage />
+				</Route>
+				<Route path="/:page" exact>
+					<MainPage />
+				</Route>
+				<Route path="/news/:id" exact>
+					<NewsPage />
+				</Route>
+				<Route path="/" exact>
+					<Redirect to="/1" />
+				</Route>
+				<Route>
+					<NotFoundPage />
+				</Route>
+			</Switch>
 		</BrowserRouter>
 	);
 };
