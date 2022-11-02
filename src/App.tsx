@@ -13,11 +13,11 @@ const App = (): JSX.Element => {
 			<Route path="/news/:id" exact>
 				<NewsPage />
 			</Route>
-			<Route path="/notfound" exact>
-				<NotFoundPage />
-			</Route>
 			<Route path="/" exact>
 				<Redirect to="/1" />
+			</Route>
+			<Route>
+				<NotFoundPage />
 			</Route>
 			<Switch />
 		</BrowserRouter>
