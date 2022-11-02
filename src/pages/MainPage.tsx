@@ -11,11 +11,7 @@ import { ErrorType } from '../types/Error.type';
 
 export const MainPage = (): JSX.Element => {
 	const { page } = useParams<{ page?: string }>();
-	const pageNumber = parseInt(page ?? '', 10);
-
-	if (isPageNotInrange(pageNumber)) {
-		return <Redirect to="/notfound" />;
-	}
+	const pageNumber = Number(page ?? '');
 
 	const { data, isFetching, isLoading, isError, error, refetch } =
 		newsService.useGetNewsQuery(pageNumber, {
@@ -25,6 +21,10 @@ export const MainPage = (): JSX.Element => {
 	const updateNews = (): void => {
 		refetch();
 	};
+
+	if (isPageNotInrange(pageNumber)) {
+		return <Redirect to="/notfound" />;
+	}
 
 	if (isError && error) {
 		const queryError = error as ErrorType;

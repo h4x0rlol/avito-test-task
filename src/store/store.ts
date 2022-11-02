@@ -2,10 +2,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { commentsService } from '../api/CommentsService';
 import { newsService } from '../api/NewsService';
-import newsReducer from './reducers/NewsSlice';
 
 const rootReducer = combineReducers({
-	newsReducer,
 	[newsService.reducerPath]: newsService.reducer,
 	[commentsService.reducerPath]: commentsService.reducer,
 });

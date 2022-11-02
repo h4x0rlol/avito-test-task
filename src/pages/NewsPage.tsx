@@ -8,7 +8,7 @@ import { News } from '../components/News';
 export const NewsPage = (): JSX.Element => {
 	const { id } = useParams<{ id?: string }>();
 	const history = useHistory();
-	const newsId = parseInt(id ?? '', 10);
+	const newsId = Number(id ?? '');
 
 	const newsItem = newsService.useGetNewsByIdQuery(newsId);
 
